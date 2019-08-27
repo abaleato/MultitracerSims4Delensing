@@ -3,6 +3,7 @@ Given theoretical auto- and cross-spectra (see [arXiv:1705.02332](https://arxiv.
  for the purpose of delensing.
 
 ### Usage
+Granted the hard-coded bits in multsims.get_multitracer_phi() relating to the number and nature of tracers, multipole ranges, etc are correct, the code is to be used as simply as
 ```
 import multsims
 
