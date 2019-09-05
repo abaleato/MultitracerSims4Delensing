@@ -18,7 +18,7 @@ def shorten_alm(input_alm, lmax_new):
     return output_alm
 
 def pad_cls(orig_cl):
-    cl_padded = np.ones(ells.shape)
+    cl_padded = np.zeros(ells.shape)
     cl_padded[lmin:lmax+1] = orig_cl
     return cl_padded
 
