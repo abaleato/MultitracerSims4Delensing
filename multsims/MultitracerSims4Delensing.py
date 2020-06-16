@@ -17,7 +17,7 @@ def shorten_alm(input_alm, lmax_new):
     output_alm[index_in_new] = input_alm[hp.Alm.getidx(lmax_old, l, m)]
     return output_alm
 
-def pad_cls(orig_cl):
+def pad_cls(orig_cl, ells):
     cl_padded = np.zeros(ells.shape)
     cl_padded[lmin:lmax+1] = orig_cl
     return cl_padded
@@ -169,29 +169,29 @@ def generate_multitracer_phi(simid, spectra_path = '/global/u1/a/ab2368/correlat
     num_of_tracers = 8
     cl = np.zeros((num_of_tracers,num_of_tracers, len(ells)), dtype='complex128') #Theory auto and cross spectra
 
-    cl[0,0,:] = pad_cls(clkk)
-    cl[1,1,:] = pad_cls(clgg_matrix[0,:])
-    cl[2,2,:] = pad_cls(clgg_matrix[1,:])
-    cl[3,3,:] = pad_cls(clgg_matrix[2,:])
-    cl[4,4,:] = pad_cls(clgg_matrix[3,:])
-    cl[5,5,:] = pad_cls(clgg_matrix[4,:])
-    cl[6,6,:] = pad_cls(clgg_matrix[5,:])
-    cl[7,7,:] = pad_cls(clII)
+    cl[0,0,:] = pad_cls(clkk, ells)
+    cl[1,1,:] = pad_cls(clgg_matrix[0,:], ells)
+    cl[2,2,:] = pad_cls(clgg_matrix[1,:], ells)
+    cl[3,3,:] = pad_cls(clgg_matrix[2,:], ells)
+    cl[4,4,:] = pad_cls(clgg_matrix[3,:], ells)
+    cl[5,5,:] = pad_cls(clgg_matrix[4,:], ells)
+    cl[6,6,:] = pad_cls(clgg_matrix[5,:], ells)
+    cl[7,7,:] = pad_cls(clII, ells)
 
-    cl[0,1,:] = cl[1,0,:] = pad_cls(clkg_matrix[0,:])
-    cl[0,2,:] = cl[2,0,:] = pad_cls(clkg_matrix[1,:])
-    cl[0,3,:] = cl[3,0,:] = pad_cls(clkg_matrix[2,:])
-    cl[0,4,:] = cl[4,0,:] = pad_cls(clkg_matrix[3,:])
-    cl[0,5,:] = cl[5,0,:] = pad_cls(clkg_matrix[4,:])
-    cl[0,6,:] = cl[6,0,:] = pad_cls(clkg_matrix[5,:])
-    cl[0,7,:] = cl[7,0,:] = pad_cls(clkI)
+    cl[0,1,:] = cl[1,0,:] = pad_cls(clkg_matrix[0,:], ells)
+    cl[0,2,:] = cl[2,0,:] = pad_cls(clkg_matrix[1,:], ells)
+    cl[0,3,:] = cl[3,0,:] = pad_cls(clkg_matrix[2,:], ells)
+    cl[0,4,:] = cl[4,0,:] = pad_cls(clkg_matrix[3,:], ells)
+    cl[0,5,:] = cl[5,0,:] = pad_cls(clkg_matrix[4,:], ells)
+    cl[0,6,:] = cl[6,0,:] = pad_cls(clkg_matrix[5,:], ells)
+    cl[0,7,:] = cl[7,0,:] = pad_cls(clkI, ells)
 
-    cl[7,1,:] = cl[1,7,:] = pad_cls(clgCIB_matrix[0,:])
-    cl[7,2,:] = cl[2,7,:] = pad_cls(clgCIB_matrix[1,:])
-    cl[7,3,:] = cl[3,7,:] = pad_cls(clgCIB_matrix[2,:])
-    cl[7,4,:] = cl[4,7,:] = pad_cls(clgCIB_matrix[3,:])
-    cl[7,5,:] = cl[5,7,:] = pad_cls(clgCIB_matrix[4,:])
-    cl[7,6,:] = cl[6,7,:] = pad_cls(clgCIB_matrix[5,:])
+    cl[7,1,:] = cl[1,7,:] = pad_cls(clgCIB_matrix[0,:], ells)
+    cl[7,2,:] = cl[2,7,:] = pad_cls(clgCIB_matrix[1,:], ells)
+    cl[7,3,:] = cl[3,7,:] = pad_cls(clgCIB_matrix[2,:], ells)
+    cl[7,4,:] = cl[4,7,:] = pad_cls(clgCIB_matrix[3,:], ells)
+    cl[7,5,:] = cl[5,7,:] = pad_cls(clgCIB_matrix[4,:], ells)
+    cl[7,6,:] = cl[6,7,:] = pad_cls(clgCIB_matrix[5,:], ells)
 
     spectra_matrix = cl.copy()
     spectra_matrix[0,0,:] = clkkrec
